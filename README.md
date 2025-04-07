@@ -148,8 +148,8 @@ npm run preview
 ## 联系方式
 
 如有任何问题或建议，请通过以下方式联系我:
-- 邮箱: your.email@example.com
-- 网站: https://yourwebsite.com
+- 邮箱: 1636678670@qq.com
+- 网站: https://Mind Break.top
 =======
 # Web-MindBreak
 个人网站MindBreak
