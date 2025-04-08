@@ -19,20 +19,27 @@ import FoodAtlas from './pages/FoodAtlas';
 // 页面过渡动画配置
 const pageVariants = {
   initial: {
-    opacity: 0
+    opacity: 0,
+    y: 20,
+    scale: 0.98
   },
   in: {
-    opacity: 1
+    opacity: 1,
+    y: 0,
+    scale: 1
   },
   exit: {
-    opacity: 0
+    opacity: 0,
+    y: -20,
+    scale: 0.98
   }
 };
 
 const pageTransition = {
-  type: "tween",
-  ease: "easeInOut",
-  duration: 0.3
+  type: "spring",
+  stiffness: 300,
+  damping: 30,
+  duration: 0.4
 };
 
 // 页面包装组件 - 添加过渡动画

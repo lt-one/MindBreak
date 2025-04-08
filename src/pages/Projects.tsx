@@ -65,6 +65,9 @@ const ProjectDetails: React.FC<{
             <img 
               src={imageUrl} 
               alt={project.title} 
+              loading="lazy"
+              width="1200"
+              height="800"
               className="w-full h-full object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -163,6 +166,9 @@ const ProjectCard: React.FC<{
         <img 
           src={imageUrl} 
           alt={project.title} 
+          loading="lazy"
+          width="600"
+          height="400"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -434,6 +440,9 @@ const Projects: React.FC = () => {
                         <img 
                           src={imageUrl} 
                           alt={project.title} 
+                          loading="lazy"
+                          width="600"
+                          height="400"
                           className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;

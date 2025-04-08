@@ -20,9 +20,9 @@ export default {
           800: '#002e62',
           900: '#001731',
         },
-        secondary: '#EFEFEF',    // 次要背景色，比primary稍深
+        secondary: '#F5F7FA',    // 更柔和的背景色
         accent: '#1E293B',       // 深蓝灰色强调色
-        accent2: '#4F46E5',      // 紫蓝色辅助强调色
+        accent2: '#005bc1',      // 与primary.600保持一致的强调色
         text: '#111827',         // 主文本颜色
         textLight: '#6B7280',    // 浅色文本
         border: '#E5E7EB',       // 边框颜色
