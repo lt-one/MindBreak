@@ -149,7 +149,7 @@ npm run preview
 
 如有任何问题或建议，请通过以下方式联系我:
 - 邮箱: 1636678670@qq.com
-- 网站: https://Mind Break.top
+- 网站: https://MindBreak.top
 =======
 # Web-MindBreak
 个人网站MindBreak

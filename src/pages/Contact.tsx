@@ -19,9 +19,9 @@ const ContactIcons: React.FC = () => {
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-800 mb-1">邮箱</h3>
-          <p className="text-gray-600 text-sm">example@example.com</p>
+          <p className="text-gray-600 text-sm">1636678670@qq.com</p>
           <a 
-            href="mailto:example@example.com" 
+            href="mailto:1636678670@qq.com" 
             className="inline-block mt-1 text-indigo-600 hover:text-indigo-800 text-xs font-medium"
           >
             发送邮件
@@ -44,9 +44,9 @@ const ContactIcons: React.FC = () => {
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-800 mb-1">电话</h3>
-          <p className="text-gray-600 text-sm">+86 123 4567 8901</p>
+          <p className="text-gray-600 text-sm">+86 17520218164</p>
           <a 
-            href="tel:+8612345678901" 
+            href="tel:+8617520218164" 
             className="inline-block mt-1 text-indigo-600 hover:text-indigo-800 text-xs font-medium"
           >
             拨打电话
@@ -70,7 +70,7 @@ const ContactIcons: React.FC = () => {
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-800 mb-1">地址</h3>
-          <p className="text-gray-600 text-sm">某某市某某区某某路123号</p>
+          <p className="text-gray-600 text-sm">广东省广州市天河区</p>
           <a 
             href="https://maps.google.com" 
             target="_blank" 
