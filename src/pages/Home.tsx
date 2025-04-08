@@ -690,16 +690,37 @@ const Home: React.FC = () => {
       </section>
 
       {/* 联系区域 */}
-      <section className="py-16 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6 zoom-in">有合作意向？</h2>
-          <p className="text-xl max-w-2xl mx-auto mb-8 zoom-in zoom-in-delay-1">如果你对我的工作感兴趣，或者有任何问题，欢迎随时联系我</p>
-          <Link 
-            to="/contact" 
-            className="inline-block bg-white text-indigo-700 font-medium py-3 px-6 rounded-lg shadow-md hover:bg-indigo-50 transition-colors bounce-in bounce-in-delay-1"
-          >
-            联系我
-          </Link>
+      <section className="py-10 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-gradient-to-r from-indigo-500/10 via-indigo-600/10 to-purple-500/10 rounded-2xl overflow-hidden shadow-sm">
+            <div className="flex flex-col md:flex-row items-center">
+              <div className="md:w-1/2 p-8 md:p-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">有合作意向?</h2>
+                <p className="text-gray-600 mb-6">如果你对我的工作感兴趣，或者有任何问题，欢迎随时联系我</p>
+                <Link 
+                  to="/contact" 
+                  className="inline-flex items-center gap-2 bg-indigo-600 text-white font-medium py-2.5 px-5 rounded-lg shadow-sm hover:bg-indigo-700 transition-colors"
+                >
+                  <span>联系我</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="hidden md:block md:w-1/2 p-6">
+                <div className="relative">
+                  <svg className="w-full h-auto text-indigo-600/20" viewBox="0 0 134 134" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M67 134C104.003 134 134 104.003 134 67C134 29.9969 104.003 0 67 0C29.9969 0 0 29.9969 0 67C0 104.003 29.9969 134 67 134Z"/>
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-20 h-20 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>
