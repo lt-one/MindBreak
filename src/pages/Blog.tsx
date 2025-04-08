@@ -375,6 +375,7 @@ const Blog: React.FC = () => {
           </div>
         </div>
       </section>
+    
     </>
   );
 };
