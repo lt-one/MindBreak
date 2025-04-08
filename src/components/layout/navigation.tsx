@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 interface NavigationProps {
   onItemClick: (path: string) => void;
@@ -22,6 +22,8 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
   const [mobileOpenMenu, setMobileOpenMenu] = useState<string | null>(null);
   // 检测是否为移动设备
   const [isMobile, setIsMobile] = useState(false);
+  // 获取当前路径
+  const location = useLocation();
 
   // 检测设备类型
   useEffect(() => {
@@ -45,6 +47,19 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
     if (isMobile) {
       setMobileOpenMenu(mobileOpenMenu === name ? null : name);
     }
+  };
+
+  // 检查当前路径是否与导航项匹配
+  const isPathActive = (path: string, currentPath: string): boolean => {
+    if (path === '/') {
+      return currentPath === '/';
+    }
+    return currentPath.startsWith(path);
+  };
+
+  // 检查子菜单中是否有当前活动路径
+  const hasActiveChild = (children: { path: string }[], currentPath: string): boolean => {
+    return children.some(child => isPathActive(child.path, currentPath));
   };
 
   // 重组导航栏结构，将相关页面归类
@@ -75,6 +90,8 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
     { name: '联系', path: '/contact', icon: '📞' },
   ];
 
+  const currentPath = location.pathname;
+
   return (
     <nav className="w-full md:w-auto">
       <ul className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-1">
@@ -85,13 +102,17 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
               <div className="relative">
                 <div
                   onClick={() => toggleMobileMenu(item.name)}
-                  className="block w-full text-left px-3 py-2 rounded-lg transition-all duration-200 font-medium text-base
-                    text-white hover:text-gray-200 hover:bg-secondary cursor-pointer"
+                  className={`block w-full text-left px-3 py-2 rounded-lg transition-all duration-200 font-medium text-base
+                    text-white hover:text-gray-200 hover:bg-secondary cursor-pointer
+                    ${hasActiveChild(item.children, currentPath) ? 'bg-accent2/20 font-semibold' : ''}`}
                 >
                   <span className="flex items-center justify-between">
                     <span className="flex items-center">
                       <span className="md:hidden mr-3">{item.icon}</span>
                       <span>{item.name}</span>
+                      {hasActiveChild(item.children, currentPath) && (
+                        <span className="inline-block w-1.5 h-1.5 bg-white rounded-full ml-2"></span>
+                      )}
                     </span>
                     <svg 
                       className={`w-4 h-4 ml-1 transition-transform ${!isMobile ? 'group-hover:rotate-180' : mobileOpenMenu === item.name ? 'rotate-180' : ''}`} 
@@ -131,6 +152,9 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
                         <span className="flex items-center">
                           <span className="mr-2">{child.icon}</span>
                           <span>{child.name}</span>
+                          {isPathActive(child.path, currentPath) && (
+                            <span className="ml-auto w-1.5 h-1.5 bg-white rounded-full"></span>
+                          )}
                         </span>
                       </NavLink>
                     </li>
@@ -147,7 +171,7 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
                 }}
                 className={({ isActive }) => `block px-3 py-2 rounded-lg transition-all duration-200 font-medium text-base
                   ${isActive
-                    ? 'bg-accent2/10 text-white' 
+                    ? 'bg-accent2/10 text-white font-semibold' 
                     : 'text-white hover:text-gray-200 hover:bg-secondary'
                   }`
                 }
@@ -155,6 +179,9 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
                 <span className="flex items-center">
                   <span className="md:hidden mr-3">{item.icon}</span>
                   <span>{item.name}</span>
+                  {isPathActive(item.path, currentPath) && item.path !== '/' && (
+                    <span className="inline-block w-1.5 h-1.5 bg-white rounded-full ml-2"></span>
+                  )}
                 </span>
               </NavLink>
             )}

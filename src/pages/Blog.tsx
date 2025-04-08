@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 // 定义博客文章类型
 interface BlogPost {
@@ -338,29 +338,64 @@ const Blog: React.FC = () => {
       </section>
       
       {/* 订阅区域 */}
-      <section className="py-16 md:py-24 bg-gray-900 text-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div className="mb-8 md:mb-0 md:w-1/2 md:pr-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">订阅我们的博客</h2>
-              <p className="text-gray-300 mb-6">
-                及时获取我们的最新文章、见解和行业动态。我们定期发送高质量内容，绝不会有垃圾邮件。
-              </p>
+      <section className="py-10 md:py-14 bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900 text-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
+            <div className="mb-6 md:mb-0 md:w-1/2 md:pr-6 flex items-start">
+              <div className="mr-4 bg-indigo-500/20 p-3 rounded-full">
+                <svg className="w-6 h-6 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 20H5V9L12 4L19 9V20Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M5 20H3V18C3 16.9 3.9 16 5 16H19C20.1 16 21 16.9 21 18V20H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 20V12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold mb-2 text-white">订阅我的博客</h2>
+                <p className="text-sm text-gray-300">
+                  获取最新文章和行业见解，我们只发送高质量内容
+                </p>
+              </div>
             </div>
             <div className="md:w-1/2">
-              <form className="flex flex-col md:flex-row gap-4">
+              <form className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="email"
                   placeholder="您的邮箱地址"
-                  className="px-4 py-3 bg-gray-800 border-0 text-white placeholder-gray-400 flex-grow focus:outline-none focus:ring-2 focus:ring-white"
+                  className="px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 rounded-lg flex-grow focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors"
+                  className="px-6 py-3 bg-indigo-500 text-white font-medium rounded-lg hover:bg-indigo-600 transition-colors whitespace-nowrap"
                 >
-                  订阅
+                  立即订阅
                 </button>
               </form>
+              <p className="text-xs text-gray-400 mt-2">我们尊重您的隐私，绝不会发送垃圾邮件</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* 联系区域 */}
+      <section className="py-8 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="w-full bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-lg overflow-hidden">
+            <div className="flex items-center p-4">
+              <div className="flex-1 flex items-center">
+                <svg className="w-5 h-5 text-gray-700 mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 10.5L11 13.5L16 7.5M7 19H17C18.1046 19 19 18.1046 19 17V7C19 5.89543 18.1046 5 17 5H7C5.89543 5 5 5.89543 5 7V17C5 18.1046 5.89543 19 7 19Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <p className="text-sm text-gray-700">有疑问或合作意向？欢迎随时与我沟通交流</p>
+              </div>
+              <Link 
+                to="/contact" 
+                className="ml-4 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+              >
+                联系我
+                <svg className="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>

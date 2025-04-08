@@ -493,19 +493,27 @@ const Projects: React.FC = () => {
         />
       )}
 
-      {/* 添加联系我区域 */}
-      <section className="py-16 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6 zoom-in">需要定制开发项目？</h2>
-          <p className="text-xl max-w-2xl mx-auto mb-8 zoom-in zoom-in-delay-1">
-            无论是数据分析解决方案、数据可视化仪表板还是其他技术实现，我都能为您提供专业服务
-          </p>
-          <Link 
-            to="/contact" 
-            className="inline-block bg-white text-indigo-700 font-medium py-3 px-8 rounded-lg shadow-md hover:bg-indigo-50 transition-colors bounce-in bounce-in-delay-1"
-          >
-            联系我
-          </Link>
+      {/* 联系区域 */}
+      <section className="py-8 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="w-full flex flex-col md:flex-row items-center justify-between bg-gray-50 border-l-4 border-indigo-500 px-6 py-4 rounded-r-lg">
+            <div className="flex items-center mb-4 md:mb-0">
+              <svg className="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9" 
+                  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <p className="text-sm font-medium text-gray-700">需要定制开发项目或技术咨询？</p>
+            </div>
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center px-4 py-2 border border-indigo-500 text-sm font-medium text-indigo-600 hover:bg-indigo-50 transition-colors rounded"
+            >
+              与我联系
+              <svg className="w-3.5 h-3.5 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
     </>

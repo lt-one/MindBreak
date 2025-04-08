@@ -690,34 +690,31 @@ const Home: React.FC = () => {
       </section>
 
       {/* 联系区域 */}
-      <section className="py-10 bg-white border-t border-gray-100">
+      <section className="py-6 bg-white border-t border-gray-100">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-r from-indigo-500/10 via-indigo-600/10 to-purple-500/10 rounded-2xl overflow-hidden shadow-sm">
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/2 p-8 md:p-10">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">有合作意向?</h2>
-                <p className="text-gray-600 mb-6">如果你对我的工作感兴趣，或者有任何问题，欢迎随时联系我</p>
+          <div className="w-full bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg shadow-sm overflow-hidden">
+            <div className="flex items-center p-4 md:px-8">
+              <div className="flex-shrink-0 mr-4">
+                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <div className="flex-1">
+                <h2 className="text-lg font-bold text-gray-900">有合作意向?</h2>
+                <p className="text-sm text-gray-600">如果对我的工作感兴趣，欢迎联系</p>
+              </div>
+              <div>
                 <Link 
                   to="/contact" 
-                  className="inline-flex items-center gap-2 bg-indigo-600 text-white font-medium py-2.5 px-5 rounded-lg shadow-sm hover:bg-indigo-700 transition-colors"
+                  className="inline-flex items-center gap-1.5 bg-indigo-600 text-white text-sm font-medium py-1.5 px-3 rounded-md hover:bg-indigo-700 transition-colors"
                 >
                   <span>联系我</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </Link>
-              </div>
-              <div className="hidden md:block md:w-1/2 p-6">
-                <div className="relative">
-                  <svg className="w-full h-auto text-indigo-600/20" viewBox="0 0 134 134" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M67 134C104.003 134 134 104.003 134 67C134 29.9969 104.003 0 67 0C29.9969 0 0 29.9969 0 67C0 104.003 29.9969 134 67 134Z"/>
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-20 h-20 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
