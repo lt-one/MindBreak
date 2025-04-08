@@ -375,31 +375,6 @@ const Blog: React.FC = () => {
           </div>
         </div>
       </section>
-      
-      {/* 联系区域 */}
-      <section className="py-8 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="w-full bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-lg overflow-hidden">
-            <div className="flex items-center p-4">
-              <div className="flex-1 flex items-center">
-                <svg className="w-5 h-5 text-gray-700 mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 10.5L11 13.5L16 7.5M7 19H17C18.1046 19 19 18.1046 19 17V7C19 5.89543 18.1046 5 17 5H7C5.89543 5 5 5.89543 5 7V17C5 18.1046 5.89543 19 7 19Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <p className="text-sm text-gray-700">有疑问或合作意向？欢迎随时与我沟通交流</p>
-              </div>
-              <Link 
-                to="/contact" 
-                className="ml-4 inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
-              >
-                联系我
-                <svg className="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 };
