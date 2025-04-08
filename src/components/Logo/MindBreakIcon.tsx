@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface MindBreakIconProps {
   size?: number;
   className?: string;

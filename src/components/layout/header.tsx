@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Navigation from './navigation';
-import MindBreakIcon from '../Logo/MindBreakIcon';
+import MindBreakIcon from '../../Logo/MindBreakIcon';
 
 interface HeaderProps {
   onNavigate?: (path: string) => void;
@@ -10,8 +10,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
 
   // 监听滚动事件
   useEffect(() => {
@@ -24,25 +22,7 @@ const Header: React.FC<HeaderProps> = () => {
   }, []);
 
   // 处理导航点击
-  const handleNavigation = (path: string) => {
-    // 关闭移动菜单
-    setIsMobileMenuOpen(false);
-    
-    // 使用navigate触发页面更新
-    navigate(path);
-  };
 
-  const menuItems = [
-    { title: '首页', path: '/' },
-    { title: '项目', path: '/projects' },
-    { title: '博客', path: '/blog' },
-    { title: '美食图鉴', path: '/food-atlas' },
-    { title: '美食搜索', path: '/food-finder' },
-    { title: '关于', path: '/about' },
-    { title: '中国哲学', path: '/chinese-philosophy' },
-    { title: '语录库', path: '/quotes' },
-    { title: '联系', path: '/contact' }
-  ];
 
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMenu = () => setIsMobileMenuOpen(false);

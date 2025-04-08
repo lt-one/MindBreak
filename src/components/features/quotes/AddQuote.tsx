@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Quote, quoteDatabase } from './QuoteGallery';
-import { motion } from 'framer-motion';
 
 // 生成唯一ID
 const generateUniqueId = (): string => {

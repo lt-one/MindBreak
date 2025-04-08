@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // 定义博客文章类型
 interface BlogPost {
@@ -127,8 +127,6 @@ const CategoryBadge: React.FC<{category: string, isActive?: boolean, onClick?: (
 };
 
 const Blog: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   
   // 博客数据
   const blogPosts: BlogPost[] = [

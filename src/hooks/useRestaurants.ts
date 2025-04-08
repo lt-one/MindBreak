@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { Restaurant } from '../services/mockRestaurantData';
+import type { Restaurant } from '../data/food/mockRestaurantData';
 import { 
   fetchNearbyRestaurants, 
   filterRestaurants,
   getRandomRestaurant
-} from '../services/mockRestaurantData';
+} from '../data/food/mockRestaurantData';
 
 interface RestaurantFilters {
   cuisineType?: string;

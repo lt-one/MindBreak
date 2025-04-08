@@ -1,6 +1,6 @@
 import React from 'react';
-import { cuisineTypes, featureTypes } from '../services/mockRestaurantData';
-import type { Restaurant } from '../services/mockRestaurantData';
+import { cuisineTypes, featureTypes } from '../../../data/food/mockRestaurantData';
+import type { Restaurant } from '../../../data/food/mockRestaurantData';
 
 interface RestaurantFiltersProps {
   filters: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Restaurant } from '../services/mockRestaurantData';
+import type { Restaurant } from '../../../data/food/mockRestaurantData';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;

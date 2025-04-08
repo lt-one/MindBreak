@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface MindBreakLogoProps {
   size?: 'sm' | 'md' | 'lg';
   variant?: 'dark' | 'light';
