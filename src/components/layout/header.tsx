@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './navigation';
-import MindBreakIcon from '../../Logo/MindBreakIcon';
+import MindBreakIcon from '../Logo/MindBreakIcon';
 
 interface HeaderProps {
   onNavigate?: (path: string) => void;
