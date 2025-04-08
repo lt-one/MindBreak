@@ -67,16 +67,7 @@ const RestaurantMap: React.FC<RestaurantMapProps> = ({
 }) => {
   // 创建自定义图标
   const createCustomIcon = (color: string) => {
-    const colors: {[key: string]: string} = {
-      'blue': '2b90d9',
-      'red': 'e53935',
-      'green': '4caf50',
-      'orange': 'ff9800',
-      'yellow': 'ffc107',
-      'purple': '9c27b0'
-    };
     
-    const colorHex = colors[color] || colors.blue;
     
     return L.icon({
       iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-${color}.png`,
@@ -89,7 +80,6 @@ const RestaurantMap: React.FC<RestaurantMapProps> = ({
   };
 
   // 备用图标 - 防止CDN无法访问
-  const defaultIcon = new L.Icon.Default();
   const userIcon = createCustomIcon('blue');
   const selectedIcon = createCustomIcon('red');
   const restaurantIcon = createCustomIcon('green');
