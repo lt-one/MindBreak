@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import Navigation from './navigation';
 import MindBreakIcon from '../../Logo/MindBreakIcon';
 
@@ -7,24 +7,24 @@ interface HeaderProps {
   onNavigate?: (path: string) => void;
 }
 
-// 面包屑导航路径映射
-const pathMap: Record<string, string> = {
-  '/': '首页',
-  '/projects': '项目',
-  '/blog': '博客',
-  '/food-finder': '美食探索',
-  '/food-atlas': '食物图鉴',
-  '/english-training': '英语学习',
-  '/chinese-philosophy': '中国哲学',
-  '/quotes': '智慧语录',
-  '/about': '关于我',
-  '/contact': '联系'
-};
+// // 面包屑导航路径映射
+// const pathMap: Record<string, string> = {
+//   '/': '首页',
+//   '/projects': '项目',
+//   '/blog': '博客',
+//   '/food-finder': '美食探索',
+//   '/food-atlas': '食物图鉴',
+//   '/english-training': '英语学习',
+//   '/chinese-philosophy': '中国哲学',
+//   '/quotes': '智慧语录',
+//   '/about': '关于我',
+//   '/contact': '联系'
+// };
 
 const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
 
   // 监听滚动事件
   useEffect(() => {
@@ -52,10 +52,10 @@ const Header: React.FC<HeaderProps> = () => {
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMenu = () => setIsMobileMenuOpen(false);
 
-  // 生成面包屑路径 - 移除此功能，但保留函数以防未来需要
-  const generateBreadcrumb = () => {
-    return null; // 不再生成面包屑导航
-  };
+  // // 生成面包屑路径 - 移除此功能，但保留函数以防未来需要
+  // const generateBreadcrumb = () => {
+  //   return null; // 不再生成面包屑导航
+  // };
 
   return (
     <header 
@@ -103,12 +103,10 @@ const Header: React.FC<HeaderProps> = () => {
         </button>
       </div>
       
-      {/* 面包屑导航 - 已移除 */}
-      
       {/* Mobile Navigation Overlay */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-white/50 backdrop-blur-sm z-40 md:hidden"
           onClick={closeMenu}
           aria-hidden="true"
         />
@@ -116,7 +114,7 @@ const Header: React.FC<HeaderProps> = () => {
       
       {/* Mobile Navigation */}
       <div 
-        className={`md:hidden fixed left-0 right-0 top-[calc(var(--header-height,72px))] bottom-0 z-40 overflow-auto bg-white transform transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed left-0 right-0 top-[calc(var(--header-height,72px))] bottom-0 z-40 overflow-auto bg-black transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ 
