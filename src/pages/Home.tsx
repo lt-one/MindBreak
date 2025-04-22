@@ -232,7 +232,7 @@ const HeroBackgroundDecorations = () => (
     <div className="hidden md:block absolute w-40 h-40 border-8 border-blue-100 rounded-full bottom-1/3 right-10 opacity-30"></div>
     
     {/* 添加中国哲学元素 */}
-    <div className="absolute top-20 right-20 opacity-10 hidden md:block">
+    <div className="absolute top-21 left-1/2 transform -translate-x-1/2 opacity-10 hidden md:block">
       <YinYangLogo size={120} />
     </div>
     <div className="absolute bottom-20 left-20 opacity-10 hidden md:block rotate-45">
@@ -354,9 +354,14 @@ const Home: React.FC = () => {
               <div className="absolute -top-10 -right-10 w-24 h-24 bg-indigo-100 rounded-full animate-pulse opacity-70"></div>
               <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-blue-100 rounded-full animate-pulse opacity-70" style={{ animationDelay: '1s' }}></div>
               <HeroIllustration />
-              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gradient-to-r from-accent2/10 to-accent2/30 p-3 rounded-lg backdrop-blur-sm fade-in fade-in-delay-4">
-                <div className="text-sm font-mono text-accent">
+              <div className="absolute top-1/2 md:right-0 right-auto transform -translate-y-1/2 md:translate-x-0 -translate-x-1/2 bg-gradient-to-r from-accent2/10 to-accent2/30 p-2 md:p-3 rounded-lg backdrop-blur-sm fade-in fade-in-delay-4 max-w-[90%] md:max-w-none">
+                <div className="text-xs md:text-sm font-mono text-accent">  
                   <span className="text-accent2">function</span> <span className="text-accent">createImpact</span>() {'{'}
+                  <div className="h-3 md:h-4"></div>
+                  <div className="text-accent2">
+                    <span className="text-accent">return</span> <span className="text-accent">MindBreak</span>()
+                  </div>
+                  {'}'}
                 </div>
               </div>
             </div>
