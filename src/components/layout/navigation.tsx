@@ -69,12 +69,8 @@ const Navigation = ({ onItemClick }: NavigationProps) => {
     { name: '博客', path: '/blog', icon: '📝' },
     { 
       name: '美食', 
-      path: '#', 
-      icon: '🍽️',
-      children: [
-        { name: '美食探索', path: '/food-finder', icon: '🍽️' },
-        { name: '食物图鉴', path: '/food-atlas', icon: '🍲' }
-      ]
+      path: '/food-atlas', 
+      icon: '🍲'
     },
     { 
       name: '学习', 

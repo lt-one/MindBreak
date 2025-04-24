@@ -104,12 +104,6 @@ const HobbyIcon: React.FC<{name: string}> = ({ name }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         );
-      case '美食探索':
-        return (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        );
       case '中国哲学':
         return (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -288,7 +282,6 @@ const Home: React.FC = () => {
     '健身', 
     '电影', 
     '编程', 
-    '美食探索',
     '游戏',
     '旅行',
     '中国哲学',

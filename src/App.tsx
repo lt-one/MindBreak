@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import FoodFinder from './pages/FoodFinder';
 import EnglishTraining from './pages/EnglishTraining';
 import Projects from './pages/Projects';
 import Blog from './pages/Blog';
@@ -87,7 +86,6 @@ const AppRoutes = () => {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-          <Route path="/food-finder" element={<PageWrapper><FoodFinder /></PageWrapper>} />
           <Route path="/food-atlas" element={<PageWrapper><FoodAtlas /></PageWrapper>} />
           <Route path="/english-training" element={<PageWrapper><EnglishTraining /></PageWrapper>} />
           <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
