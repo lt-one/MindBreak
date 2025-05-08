@@ -207,8 +207,8 @@ const TodoPage: React.FC = () => {
     
     // 如果在线，将重排序同步到服务器
     if (isOnline) {
-      // 这里可以添加保存顺序到服务器的逻辑
-      // ...
+    // 这里可以添加保存顺序到服务器的逻辑
+    // ...
     }
   };
 
@@ -363,7 +363,7 @@ const TodoPage: React.FC = () => {
             </motion.label>
           </div>
         </motion.div>
-        
+
         {/* 错误提示 */}
         {error && (
           <motion.div 
@@ -394,24 +394,24 @@ const TodoPage: React.FC = () => {
             <p className="text-2xl font-bold text-amber-700">{stats.pending}</p>
           </div>
         </motion.div>
-        
+
         {/* Todo列表 */}
         <motion.div variants={itemVariants}>
-          {isLoading ? (
+        {isLoading ? (
             <div className="text-center py-12">
               <div className="w-12 h-12 border-4 border-accent rounded-full border-b-transparent mx-auto animate-spin"></div>
               <p className="mt-4 text-gray-600">正在加载任务...</p>
-            </div>
-          ) : (
-            <TodoList 
-              todos={todos}
-              onToggleTodo={handleToggleTodo}
-              onDeleteTodo={handleDeleteTodo}
-              onEditTodo={handleEditTodo}
-              onAddTodo={handleAddTodo}
-              onReorderTodos={handleReorderTodos}
-            />
-          )}
+          </div>
+        ) : (
+          <TodoList
+            todos={todos}
+            onToggleTodo={handleToggleTodo}
+            onDeleteTodo={handleDeleteTodo}
+            onEditTodo={handleEditTodo}
+            onAddTodo={handleAddTodo}
+            onReorderTodos={handleReorderTodos}
+          />
+        )}
         </motion.div>
       </div>
     </motion.div>

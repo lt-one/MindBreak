@@ -227,10 +227,14 @@ const HeroBackgroundDecorations = () => (
     
     {/* 添加中国哲学元素 */}
     <div className="absolute top-21 left-1/2 transform -translate-x-1/2 opacity-10 hidden md:block">
-      <YinYangLogo size={120} />
+      <div>
+        <YinYangLogo size={120} />
+      </div>
     </div>
     <div className="absolute bottom-20 left-20 opacity-10 hidden md:block rotate-45">
-      <YinYangLogo size={100} />
+      <div>
+        <YinYangLogo size={100} />
+      </div>
     </div>
   </div>
 );
@@ -409,7 +413,11 @@ const Home: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col md:flex-row items-center mb-12 gap-8">
               <div className="md:w-1/4 flex justify-center">
-                <YinYangLogo size={150} className="float-up animate-breath pause-on-hover" />
+                <div className="float-up">
+                  <div className="animate-breath">
+                    <YinYangLogo size={150} className="pause-on-hover" />
+                  </div>
+                </div>
               </div>
               <div className="md:w-3/4">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6 float-up">东方智慧</h2>

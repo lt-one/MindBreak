@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Quote } from '../../../data/quotes/quoteData';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Quote } from '../../../data/quotes';
 
 // 定义组件Props类型
 interface RandomQuoteProps {
@@ -19,23 +19,25 @@ const RandomQuote: React.FC<RandomQuoteProps> = ({ quotes, title, refreshInterva
   const [quote, setQuote] = useState(getRandomQuote(quotes));
   const [fade, setFade] = useState(true);
 
-  // 手动刷新语录的函数
-  const refreshQuote = () => {
+  // 使用useCallback包装refreshQuote函数，避免每次渲染都创建新的函数引用
+  const refreshQuote = useCallback(() => {
     setFade(false);
     setTimeout(() => {
       setQuote(getRandomQuote(quotes));
       setFade(true);
     }, 500);
-  };
+  }, [quotes]);
 
   // 每隔一定时间更新一次语录
   useEffect(() => {
-    const interval = setInterval(() => {
-      refreshQuote();
-    }, refreshInterval); // 使用传入的更新间隔
+    // 只在组件挂载时创建一次定时器
+    const interval = setInterval(refreshQuote, refreshInterval);
     
+    // 组件卸载时清除定时器
     return () => clearInterval(interval);
-  }, [quotes, refreshInterval]);
+    
+    // 只有当refreshInterval或refreshQuote变化时才重新设置定时器
+  }, [refreshInterval, refreshQuote]);
 
   return (
     <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg shadow-sm border border-indigo-100 dark:border-indigo-900/30 p-5 transition-all">
