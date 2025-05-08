@@ -1,203 +1,315 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaHome, FaLaptopCode, FaRegNewspaper, FaUser, FaEnvelope, FaBook, FaQuoteLeft, FaTasks } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
+import { RiEnglishInput } from 'react-icons/ri';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
-interface NavigationProps {
-  onItemClick: (path: string) => void;
-}
-
-// 定义导航项类型
-interface NavItem {
+// 导航项接口
+interface NavigationItem {
   name: string;
   path: string;
-  icon: string;
-  children?: {
-    name: string;
-    path: string;
-    icon: string;
-  }[];
+  icon: React.ReactNode;
+  children?: NavigationItem[];
 }
 
-const Navigation = ({ onItemClick }: NavigationProps) => {
-  // 移动设备下拉菜单状态（移动设备不支持hover）
-  const [mobileOpenMenu, setMobileOpenMenu] = useState<string | null>(null);
-  // 检测是否为移动设备
-  const [isMobile, setIsMobile] = useState(false);
-  // 获取当前路径
+// 添加组件props接口
+interface NavigationProps {
+  onItemClick?: () => void;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ onItemClick }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
 
-  // 检测设备类型
+  // 检测移动设备
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const checkIfMobile = () => {
+      // 只在屏幕尺寸变化时关闭移动菜单，而不是设置它的状态
+      if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
     };
     
-    // 初始检测
-    checkIsMobile();
-    
-    // 窗口大小变化时重新检测
-    window.addEventListener('resize', checkIsMobile);
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
     
     return () => {
-      window.removeEventListener('resize', checkIsMobile);
+      window.removeEventListener('resize', checkIfMobile);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
-  // 切换移动设备下拉菜单
-  const toggleMobileMenu = (name: string) => {
-    if (isMobile) {
-      setMobileOpenMenu(mobileOpenMenu === name ? null : name);
+  // 关闭移动菜单
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  // 子菜单切换
+  const toggleSubmenu = (name: string) => {
+    if (openSubmenu === name) {
+      setOpenSubmenu(null);
+    } else {
+      setOpenSubmenu(name);
     }
   };
 
-  // 检查当前路径是否与导航项匹配
-  const isPathActive = (path: string, currentPath: string): boolean => {
+  // 检查当前路径是否活跃
+  const isActivePath = (path: string): boolean => {
     if (path === '/') {
-      return currentPath === '/';
+      return location.pathname === path;
     }
-    return currentPath.startsWith(path);
+    return location.pathname.startsWith(path);
   };
 
-  // 检查子菜单中是否有当前活动路径
-  const hasActiveChild = (children: { path: string }[], currentPath: string): boolean => {
-    return children.some(child => isPathActive(child.path, currentPath));
+  // 检查子菜单项是否有活跃项
+  const hasActiveChild = (items: NavigationItem[]): boolean => {
+    return items.some(item => isActivePath(item.path));
   };
 
-  // 重组导航栏结构，将相关页面归类
-  const navItems: NavItem[] = [
-    { name: '首页', path: '/', icon: '🏠' },
-    { name: '项目', path: '/projects', icon: '💻' },
-    { name: '博客', path: '/blog', icon: '📝' },
-    { 
-      name: '美食', 
-      path: '/food-atlas', 
-      icon: '🍲'
+  // 导航项列表
+  const navigationItems: NavigationItem[] = [
+    {
+      name: '首页',
+      path: '/',
+      icon: <FaHome className="text-xl" />,
+    },
+    {
+      name: '项目',
+      path: '/projects',
+      icon: <FaLaptopCode className="text-xl" />,
+    },
+    {
+      name: '博客',
+      path: '/blog',
+      icon: <FaRegNewspaper className="text-xl" />,
     },
     { 
       name: '学习', 
-      path: '#', 
-      icon: '📚',
+      path: '/learning',
+      icon: <FaBook className="text-xl" />,
       children: [
-        { name: '英语学习', path: '/english-training', icon: '📚' },
-        { name: '中国哲学', path: '/chinese-philosophy', icon: '☯️' },
-        { name: '智慧语录', path: '/quotes', icon: '💭' }
+        {
+          name: '英语学习',
+          path: '/english-training',
+          icon: <RiEnglishInput className="text-xl" />,
+        },
+        {
+          name: '中国哲学',
+          path: '/chinese-philosophy',
+          icon: <FaBook className="text-xl" />,
+        },
+        {
+          name: '名人名言',
+          path: '/quotes',
+          icon: <FaQuoteLeft className="text-xl" />,
+        }
       ]
     },
-    { name: '关于我', path: '/about', icon: '👤' },
-    { name: '联系', path: '/contact', icon: '📞' },
+    {
+      name: '待办事项',
+      path: '/todo',
+      icon: <FaTasks className="text-xl" />,
+    },
+    {
+      name: '关于我',
+      path: '/about',
+      icon: <FaUser className="text-xl" />,
+    },
+    {
+      name: '联系',
+      path: '/contact',
+      icon: <FaEnvelope className="text-xl" />,
+    },
   ];
 
-  const currentPath = location.pathname;
+  // 移动菜单动画
+  const mobileMenuVariants = {
+    closed: {
+      opacity: 0,
+      x: "100%",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    },
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  // 子菜单动画
+  const submenuVariants = {
+    closed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    },
+    open: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   return (
-    <nav className="w-full md:w-auto">
-      <ul className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-1">
-        {navItems.map((item) => (
-          <li key={item.name} className={`relative ${!isMobile && item.children ? 'group' : ''}`}>
+    <>
+      <div className="flex items-center space-x-8">
+        {navigationItems.map((item) => (
+          <div key={item.name} className="relative group py-2">
             {item.children ? (
-              // 有子菜单的导航项 - 使用悬停效果（桌面端）或点击效果（移动端）
-              <div className="relative">
-                <div
-                  onClick={() => toggleMobileMenu(item.name)}
-                  className={`block w-full text-left px-3 py-2 rounded-lg transition-all duration-200 font-medium text-base
-                    text-white hover:text-gray-200 hover:bg-secondary cursor-pointer
-                    ${hasActiveChild(item.children, currentPath) ? 'bg-accent2/20 font-semibold' : ''}`}
+              <div className="flex items-center cursor-pointer relative">
+                <span 
+                  className={`flex items-center mr-1 font-display font-kai relative text-gray-300 hover:text-gray-100 transition-colors duration-200 ${hasActiveChild(item.children) ? 'font-semibold' : ''}`}
                 >
-                  <span className="flex items-center justify-between">
-                    <span className="flex items-center">
-                      <span className="md:hidden mr-3">{item.icon}</span>
-                      <span>{item.name}</span>
-                      {hasActiveChild(item.children, currentPath) && (
-                        <span className="inline-block w-1.5 h-1.5 bg-white rounded-full ml-2"></span>
-                      )}
-                    </span>
-                    <svg 
-                      className={`w-4 h-4 ml-1 transition-transform ${!isMobile ? 'group-hover:rotate-180' : mobileOpenMenu === item.name ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24" 
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                </div>
-                {/* 下拉菜单 - 桌面端悬停显示，移动端点击显示 */}
-                <ul className={`
-                  ${!isMobile 
-                    ? 'invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out' 
-                    : mobileOpenMenu === item.name ? 'block' : 'hidden'
-                  }
-                  ${!isMobile ? 'absolute' : 'relative'} ${!isMobile ? 'top-full left-0' : ''}
-                  mt-1 min-w-[180px] bg-gray-800 rounded-lg shadow-lg overflow-hidden z-10`}
-                >
-                  {item.children.map((child) => (
-                    <li key={child.path}>
-                      <NavLink
-                        to={child.path}
-                        onClick={() => {
-                          onItemClick(child.path);
-                          setMobileOpenMenu(null);
-                        }}
-                        className={({ isActive }) => `block px-3 py-2 transition-all duration-200 font-medium text-sm
-                          ${isActive
-                            ? 'bg-accent2/20 text-white' 
-                            : 'text-gray-200 hover:text-white hover:bg-gray-700'
-                          }`
-                        }
-                      >
-                        <span className="flex items-center">
-                          <span className="mr-2">{child.icon}</span>
-                          <span>{child.name}</span>
-                          {isPathActive(child.path, currentPath) && (
-                            <span className="ml-auto w-1.5 h-1.5 bg-white rounded-full"></span>
-                          )}
-                        </span>
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              // 没有子菜单的导航项
-              <NavLink 
-                to={item.path}
-                onClick={() => {
-                  onItemClick(item.path);
-                  setMobileOpenMenu(null);
-                }}
-                className={({ isActive }) => `block px-3 py-2 rounded-lg transition-all duration-200 font-medium text-base
-                  ${isActive
-                    ? 'bg-accent2/10 text-white font-semibold' 
-                    : 'text-white hover:text-gray-200 hover:bg-secondary'
-                  }`
-                }
-              >
-                <span className="flex items-center">
-                  <span className="md:hidden mr-3">{item.icon}</span>
-                  <span>{item.name}</span>
-                  {isPathActive(item.path, currentPath) && item.path !== '/' && (
-                    <span className="inline-block w-1.5 h-1.5 bg-white rounded-full ml-2"></span>
+                  {item.icon}
+                  <span className="ml-1">{item.name}</span>
+                  <MdKeyboardArrowDown className="ml-1" />
+                  {hasActiveChild(item.children) && (
+                    <span className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full"></span>
                   )}
                 </span>
-              </NavLink>
+                
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.name}
+                      to={child.path}
+                      className={`block px-4 py-3 text-sm text-gray-800 hover:bg-indigo-50 flex items-center font-display font-kai ${isActivePath(child.path) ? 'bg-indigo-50 text-indigo-600 font-semibold border-l-4 border-indigo-400' : ''}`}
+                      onClick={onItemClick}
+                    >
+                      {child.icon}
+                      <span className="ml-2">{child.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                to={item.path}
+                className={`flex items-center font-display relative text-gray-300 hover:text-gray-100 transition-colors duration-200 ${isActivePath(item.path) ? 'font-semibold' : ''}`}
+                onClick={onItemClick}
+              >
+                {item.icon}
+                <span className="ml-1 font-kai">{item.name}</span>
+                {isActivePath(item.path) && (
+                  <span className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full"></span>
+                )}
+              </Link>
             )}
-          </li>
+          </div>
         ))}
-        <li>
-          <a 
-            href="https://github.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center ml-4 text-white hover:text-gray-100 transition-colors duration-200"
-            aria-label="GitHub"
+      </div>
+
+      {/* 移动导航菜单 */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={mobileMenuVariants}
+            className="fixed top-0 right-0 w-4/5 h-full bg-gray-900 shadow-lg z-50 overflow-y-auto"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
+            <div className="flex justify-between items-center p-6 border-b border-gray-800">
+              <h2 className="text-xl font-bold font-display">菜单</h2>
+              <button 
+                onClick={closeMobileMenu}
+                className="p-2 focus:outline-none"
+                aria-label="关闭菜单"
+              >
+                <IoClose size={24} />
+              </button>
+            </div>
+            <div className="p-6">
+              {navigationItems.map((item) => (
+                <div key={item.name} className="mb-4">
+                  {item.children ? (
+                    <div>
+                      <button
+                        onClick={() => toggleSubmenu(item.name)}
+                        className={`w-full text-left flex items-center justify-between p-2 rounded-md font-display relative ${hasActiveChild(item.children) ? 'bg-gray-800 font-semibold text-gray-100' : 'text-gray-300 hover:text-gray-100 hover:bg-gray-800'}`}
+                      >
+                        <span className="flex items-center">
+                          {item.icon}
+                          <span className="ml-2 font-kai">{item.name}</span>
+                        </span>
+                        <div className="flex items-center">
+                          {hasActiveChild(item.children) && (
+                            <span className="w-1.5 h-1.5 bg-white rounded-full mr-2"></span>
+                          )}
+                          <MdKeyboardArrowDown className={`transition-transform duration-300 ${openSubmenu === item.name ? 'rotate-180' : ''}`} />
+                        </div>
+                      </button>
+                      <AnimatePresence>
+                        {openSubmenu === item.name && (
+                          <motion.div
+                            initial="closed"
+                            animate="open"
+                            exit="closed"
+                            variants={submenuVariants}
+                            className="ml-4 mt-1 overflow-hidden"
+                          >
+                            {item.children.map((child) => (
+                              <Link
+                                key={child.name}
+                                to={child.path}
+                                className={`flex items-center p-2 mt-1 rounded-md font-display relative ${isActivePath(child.path) ? 'bg-gray-700 font-semibold text-gray-100' : 'text-gray-300 hover:text-gray-100 hover:bg-gray-800'}`}
+                                onClick={() => {
+                                  closeMobileMenu();
+                                  if (onItemClick) onItemClick();
+                                }}
+                              >
+                                <span className="flex items-center flex-1">
+                                  {child.icon}
+                                  <span className="ml-2 font-kai">{child.name}</span>
+                                </span>
+                                {isActivePath(child.path) && (
+                                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
+                                )}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={`flex items-center p-2 rounded-md font-display relative ${isActivePath(item.path) ? 'bg-gray-700 font-semibold text-gray-100' : 'text-gray-300 hover:text-gray-100 hover:bg-gray-800'}`}
+                      onClick={() => {
+                        closeMobileMenu();
+                        if (onItemClick) onItemClick();
+                      }}
+                    >
+                      <span className="flex items-center flex-1">
+                        {item.icon}
+                        <span className="ml-2 font-kai">{item.name}</span>
+                      </span>
+                      {isActivePath(item.path) && (
+                        <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
+                      )}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

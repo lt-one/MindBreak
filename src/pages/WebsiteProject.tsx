@@ -101,32 +101,44 @@ const StatCard: React.FC<{
 
 const WebsiteProject: React.FC = () => {
   // 示例代码
-  const reactComponentCode = `const RestaurantMap: React.FC<RestaurantMapProps> = ({ 
-  userLocation, 
-  restaurants, 
-  selectedRestaurant,
-  onRestaurantSelect 
-}) => {
-  // 创建自定义图标
-  const createCustomIcon = (color: string) => {
-    return L.icon({
-      iconUrl: \`https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-\${color}.png\`,
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
+  const reactComponentCode = `const NavigationComponent: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  
+  // 检查当前路径是否活跃
+  const isActivePath = (path: string): boolean => {
+    if (path === '/') {
+      return location.pathname === path;
+    }
+    return location.pathname.startsWith(path);
   };
-
+  
   return (
-    <MapContainer center={center} zoom={14}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={center} icon={createCustomIcon('blue')}>
-        <Popup>您的位置</Popup>
-      </Marker>
-      {/* 餐厅标记 */}
-    </MapContainer>
+    <nav className="flex justify-between items-center w-full py-4 px-6">
+      <div className="flex items-center">
+        <Link to="/" className="text-xl font-bold">我的个人网站</Link>
+      </div>
+      
+      <div className="hidden lg:flex space-x-6">
+        {navigationItems.map((item) => (
+          <Link
+            key={item.name}
+            to={item.path}
+            className={\`flex items-center \${isActivePath(item.path) ? 'text-primary-600 font-semibold' : ''}\`}
+          >
+            {item.icon}
+            <span className="ml-1">{item.name}</span>
+          </Link>
+        ))}
+      </div>
+      
+      {/* 移动导航按钮 */}
+      <div className="lg:hidden">
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {isMobileMenuOpen ? '关闭' : '菜单'}
+        </button>
+      </div>
+    </nav>
   );
 };`;
 
@@ -484,7 +496,7 @@ module.exports = {
               </p>
 
               <CodeSnippet 
-                title="RestaurantMap.tsx" 
+                title="NavigationComponent.tsx" 
                 language="typescript" 
                 code={reactComponentCode} 
               />

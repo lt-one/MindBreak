@@ -11,11 +11,11 @@ const Footer = () => {
             <div className="flex items-center gap-3 mb-4">
               <MindBreakIcon size={32} />
               <div>
-                <div className="text-xl font-bold">见心光</div>
-                <div className="text-sm text-gray-400">MindBreak</div>
+                <div className="text-xl font-bold font-display">见心光</div>
+                <div className="text-sm text-gray-400 font-display">MindBreak</div>
               </div>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 mb-4 font-body">
               探索内心，体验东方智慧与现代设计的完美结合
             </p>
             <div className="flex space-x-4">
@@ -39,8 +39,8 @@ const Footer = () => {
 
           {/* 导航链接 */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-white">导航</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-semibold mb-4 text-white font-display">导航</h3>
+            <ul className="space-y-2 font-kai">
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors">首页</Link>
               </li>
@@ -61,11 +61,8 @@ const Footer = () => {
 
           {/* 项目链接 */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-white">项目</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/food-finder" className="text-gray-400 hover:text-white transition-colors">美食探索</Link>
-              </li>
+            <h3 className="text-lg font-semibold mb-4 text-white font-display">项目</h3>
+            <ul className="space-y-2 font-kai">
               <li>
                 <Link to="/english-training" className="text-gray-400 hover:text-white transition-colors">英语学习</Link>
               </li>
@@ -80,8 +77,8 @@ const Footer = () => {
 
           {/* 联系方式 */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-white">联系我</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-semibold mb-4 text-white font-display">联系我</h3>
+            <ul className="space-y-2 font-body">
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -106,7 +103,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400 text-sm">© {new Date().getFullYear()} MindBreak. 保留所有权利。</p>
+          <p className="text-gray-400 text-sm font-body">© {new Date().getFullYear()} MindBreak. 保留所有权利。</p>
         </div>
       </div>
     </footer>

@@ -17,20 +17,18 @@
 @layer base {
   html {
     font-family: 'Inter', sans-serif;
-    color: theme('colors.text');
-    background-color: theme('colors.primary.50');
+    @apply text-text bg-primary-50;
     scroll-behavior: smooth;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: theme('colors.accent');
+    @apply text-accent;
   }
 
   ::selection {
-    background-color: theme('colors.accent2');
-    color: white;
+    @apply bg-accent2 text-white;
   }
 
   body {
