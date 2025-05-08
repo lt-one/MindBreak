@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import EnglishTraining from './pages/EnglishTraining';
-import Projects from './pages/Projects';
-import Blog from './pages/Blog';
-import About from './pages/About';
-import Contact from './pages/Contact';
 import Layout from './components/layout/layout';
-import WebsiteProject from './pages/WebsiteProject';
-import ChinesePhilosophy from './pages/ChinesePhilosophy';
-import QuoteGallery from './components/features/quotes/QuoteGallery';
-import Todo from './pages/Todo';
 import { AnimatePresence, motion } from 'framer-motion';
+
+// 使用React.lazy懒加载页面组件
+const Home = React.lazy(() => import('./pages/Home'));
+const EnglishTraining = React.lazy(() => import('./pages/EnglishTraining'));
+const Projects = React.lazy(() => import('./pages/Projects'));
+const Blog = React.lazy(() => import('./pages/Blog'));
+const About = React.lazy(() => import('./pages/About'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const WebsiteProject = React.lazy(() => import('./pages/WebsiteProject'));
+const ChinesePhilosophy = React.lazy(() => import('./pages/ChinesePhilosophy'));
+const QuoteGallery = React.lazy(() => import('./components/features/quotes/QuoteGallery'));
+const Todo = React.lazy(() => import('./pages/Todo'));
 
 // 页面过渡动画配置
 const pageVariants = {
@@ -39,6 +41,16 @@ const pageTransition = {
   duration: 0.4
 };
 
+// 加载中组件
+const LoadingFallback = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-pulse flex flex-col items-center">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-accent2 rounded-full animate-spin"></div>
+      <p className="mt-4 text-accent font-medium">正在加载中...</p>
+    </div>
+  </div>
+);
+
 // 页面包装组件 - 添加过渡动画
 const PageWrapper = ({ children }: { children: React.ReactNode }) => (
   <motion.div
@@ -64,21 +76,23 @@ const AppRoutes = () => {
 
   return (
     <Layout>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-          <Route path="/english-training" element={<PageWrapper><EnglishTraining /></PageWrapper>} />
-          <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
-          <Route path="/website-project" element={<PageWrapper><WebsiteProject /></PageWrapper>} />
-          <Route path="/blog" element={<PageWrapper><Blog /></PageWrapper>} />
-          <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-          <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-          <Route path="/chinese-philosophy" element={<PageWrapper><ChinesePhilosophy /></PageWrapper>} />
-          <Route path="/quotes" element={<PageWrapper><QuoteGallery /></PageWrapper>} />
-          <Route path="/todo" element={<PageWrapper><Todo /></PageWrapper>} />
-          <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
-        </Routes>
-      </AnimatePresence>
+      <Suspense fallback={<LoadingFallback />}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+            <Route path="/english-training" element={<PageWrapper><EnglishTraining /></PageWrapper>} />
+            <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+            <Route path="/website-project" element={<PageWrapper><WebsiteProject /></PageWrapper>} />
+            <Route path="/blog" element={<PageWrapper><Blog /></PageWrapper>} />
+            <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+            <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+            <Route path="/chinese-philosophy" element={<PageWrapper><ChinesePhilosophy /></PageWrapper>} />
+            <Route path="/quotes" element={<PageWrapper><QuoteGallery /></PageWrapper>} />
+            <Route path="/todo" element={<PageWrapper><Todo /></PageWrapper>} />
+            <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
     </Layout>
   );
 };
